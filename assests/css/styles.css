@@ -44,6 +44,7 @@ textarea {
   background-color: #ffffff;
   color: #000000;
   border-top: 1px dashed #000000;
+  text-align: center;
 }
 
 .past {
@@ -73,22 +74,3 @@ textarea {
   font-size: 20px;
   transition: all 0.3s ease-in-out;
 }
-
-/* responsive */
-
-/* @media (min-width: 576px) {
-  .container {
-  }
-} */
-
-/* @media (min-width: 768px) {
-  ...;
-}
-
-@media (min-width: 1200px) {
-  ...;
-}
-
-@media (min-width: 1400px) {
-  ...;
-} */
