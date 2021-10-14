@@ -81,7 +81,7 @@ const renderTimeBlocks = function () {
     <div class="col-1 hour">${timeBlock.key}</div>
     <textarea class="col-10 description past"></textarea>
     <button class="col-1 btn saveBtn" id=${timeBlock.key}>
-      <i class="fas fa-unlock"></i>
+    <i class="fas fa-save"></i>
     </button>
   </div>`;
 
