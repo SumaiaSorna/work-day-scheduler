@@ -31,9 +31,7 @@ const getDataFromLS = function () {
   // else return data
 };
 
-const saveSchedule = function () {
-  console.log("working");
-};
+const saveSchedule = function () {};
 
 const renderTimeBlocks = function () {
   // declare time blocks
