@@ -1,8 +1,8 @@
 //START1
 const dateText = $("#currentDay");
 const timeText = $("#currentTime");
-const timeBlockContainer = $(".container"); // change
-const currentHour = moment().hour(); // change
+const timeBlock = $(".container");
+const currentHr = moment().hour();
 
 // use moment to get current date & time in format & real time update
 const getCurrentDate = function () {
@@ -31,9 +31,13 @@ const getDataFromLS = function () {
   // else return data
 };
 
+const saveSchedule = function () {
+  console.log("working");
+};
+
 const renderTimeBlocks = function () {
   // declare time blocks
-  const timeBlockLabels = [
+  const timeBlock = [
     {
       key: 9,
       label: "09:00",
@@ -71,11 +75,22 @@ const renderTimeBlocks = function () {
       label: "17:00",
     },
   ];
-  console.log(timeBlockLabels);
 
   const constructTimeBlock = function (timeBlock) {
+    const schedule = `<div class="row time-block">
+    <div class="col-1 hour">${timeBlock.key}</div>
+    <textarea class="col-10 description past"></textarea>
+    <button class="col-1 btn saveBtn" id=${timeBlock.key}>
+      <i class="fas fa-unlock"></i>
+    </button>
+  </div>`;
+
+    $(`#${timeBlock.key}`).on("click", saveSchedule());
     // get the label for the time block 09:00
-    const label = timeBlock.label;
+    // const label = timeBlock.label;
+
+    $("#container").append(schedule);
+    console.log(timeBlock);
 
     // get className for the specific time block
     const className = getClassName();
@@ -91,9 +106,7 @@ const renderTimeBlocks = function () {
     // return constructed time block element
   };
 
-  timeBlockLabels.map(constructTimeBlock).join("");
-
-  // append HTML to parent
+  timeBlock.map(constructTimeBlock).join("");
 };
 
 // function to call when document loads
@@ -108,4 +121,12 @@ const onLoad = function () {
 };
 
 // add load listener
-$(document).ready(onLoad);
+$(document).ready(function () {
+  getCurrentDate();
+  // render current date
+  const formattedDate = getCurrentDate();
+  renderCurrentDate(formattedDate);
+
+  // render time blocks
+  renderTimeBlocks();
+});

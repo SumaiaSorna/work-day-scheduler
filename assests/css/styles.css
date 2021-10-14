@@ -8,7 +8,7 @@ textarea {
   background: transparent;
   /* border: none; */
   /* resize: none; */
-  color: #881616;
+  color: #d81616;
   border-left: 1px solid rgb(82, 10, 10);
   padding: 10px;
 }
@@ -21,10 +21,6 @@ textarea {
   border-bottom: 10px solid black;
 }
 
-/* .container {
-  margin-bottom: 100%;
-} */
-
 .description {
   white-space: pre-wrap;
 }
@@ -32,6 +28,7 @@ textarea {
 .time-block {
   text-align: center;
   border-radius: 15px;
+  margin-bottom: 1rem;
 }
 
 .row {
@@ -66,8 +63,8 @@ textarea {
   border-left: 1px solid black;
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
-  background-color: #06aed5;
-  color: white;
+  background-color: #d58206;
+  color: rgb(173, 10, 10);
 }
 
 .saveBtn i:hover {
