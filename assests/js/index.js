@@ -18,23 +18,19 @@ const getCurrentDate = function () {
   setInterval(timer, 1000); // real time update
 };
 
-// target element and set text with date
+// Define functions for later use
 const renderCurrentDate = function () {};
+const saveSchedule = function () {};
+const getClassName = function () {};
 
-const getClassName = function () {
-  return "past";
-};
-
+// get from LS by key                            // not done
 const getDataFromLS = function () {
-  // get from LS by key
   // if it does not exist return {}
   // else return data
 };
 
-const saveSchedule = function () {};
-
+// declare time blocks by key
 const renderTimeBlocks = function () {
-  // declare time blocks
   const timeBlock = [
     {
       key: 9,
@@ -74,6 +70,7 @@ const renderTimeBlocks = function () {
     },
   ];
 
+  // Table creation
   const constructTimeBlock = function (timeBlock) {
     const schedule = `<div class="row time-block">
     <div class="col-1 hour">${timeBlock.key}</div>
@@ -84,24 +81,18 @@ const renderTimeBlocks = function () {
   </div>`;
 
     $(`#${timeBlock.key}`).on("click", saveSchedule());
-    // get the label for the time block 09:00
-    // const label = timeBlock.label;
 
-    $("#container").append(schedule);
-    console.log(timeBlock);
+    $("#maincontainer").append(schedule);
+    //console.log(timeBlock); // not required
 
     // get className for the specific time block
-    const className = getClassName();
+    //const className = getClassName(); // not used yet
 
     // get text from LS for the specific time block
-    const planner = getDataFromLS();
+    //const planner = getDataFromLS();; // not used yet
 
     // check if planner has text for the specific time block
     // if yes then use the as the text else empty string
-
-    // construct your time block element in HTML
-
-    // return constructed time block element
   };
 
   timeBlock.map(constructTimeBlock).join("");
@@ -109,22 +100,20 @@ const renderTimeBlocks = function () {
 
 // function to call when document loads
 const onLoad = function () {
-  getCurrentDate();
+  getCurrentDate(); // not used yet
   // render current date
-  const formattedDate = getCurrentDate();
-  renderCurrentDate(formattedDate);
-
+  const formattedDate = getCurrentDate(); // not used yet
+  //renderCurrentDate(formattedDate); // not used yet
   // render time blocks
-  renderTimeBlocks();
+  renderTimeBlocks(); // not used yet
 };
 
 // add load listener
 $(document).ready(function () {
-  getCurrentDate();
+  //getCurrentDate(); // not used yet
   // render current date
   const formattedDate = getCurrentDate();
-  renderCurrentDate(formattedDate);
-
+  //renderCurrentDate(formattedDate); // not used yet
   // render time blocks
   renderTimeBlocks();
 });
