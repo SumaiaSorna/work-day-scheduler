@@ -1,4 +1,4 @@
-//START1
+//Variable declaration
 const dateText = $("#currentDay");
 const timeText = $("#currentTime");
 const timeBlock = $(".container");
@@ -18,18 +18,31 @@ const getCurrentDate = function () {
   setInterval(timer, 1000); // real time update
 };
 
-// Define functions for later use
-const renderCurrentDate = function () {};
-const saveSchedule = function () {};
-const getClassName = function () {};
+//  //Save data to LS--------------------------------------------------- not functional
+const saveSchedule = function () {
+  console.log("working"); ///test
 
-// get from LS by key                            // not done
-const getDataFromLS = function () {
-  // if it does not exist return {}
-  // else return data
+  // Creat space in LS
+  const containerLS = function () {}; //--- not sure how to do
+
+  //record at LS
+  const recordedData = function () {
+    const inputtedData = containerLS;
+    const inputtedTime = timeBlock.key;
+    localStorage.setItem(inputtedData, inputtedTime);
+    $(".saveBtn").on("click", recordedData);
+  };
+
+  //LS checking at the beginning
+  const initialCheckLS = function () {
+    const initialState = localStorage.setItem(containerLS);
+    if (!initialState) {
+      localStorage.setItem(containerLS, JSON.stringify({}));
+    }
+  };
 };
 
-// declare time blocks by key
+// declare time blocks by key and table creation
 const renderTimeBlocks = function () {
   const timeBlock = [
     {
@@ -71,9 +84,10 @@ const renderTimeBlocks = function () {
   ];
 
   // Table creation
+
   const constructTimeBlock = function (timeBlock) {
     const schedule = `<div class="row time-block">
-    <div class="col-1 hour">${timeBlock.key}</div>
+    <div class="col-1 hour">${timeBlock.label}</div>
     <textarea class="col-10 description past"></textarea>
     <button class="col-1 btn saveBtn" id=${timeBlock.key}>
     <i class="fas fa-save"></i>
@@ -81,39 +95,29 @@ const renderTimeBlocks = function () {
   </div>`;
 
     $(`#${timeBlock.key}`).on("click", saveSchedule());
-
-    $("#maincontainer").append(schedule);
-    //console.log(timeBlock); // not required
-
-    // get className for the specific time block
-    //const className = getClassName(); // not used yet
-
-    // get text from LS for the specific time block
-    //const planner = getDataFromLS();; // not used yet
-
-    // check if planner has text for the specific time block
-    // if yes then use the as the text else empty string
+    $("#mainContainer").append(schedule);
   };
 
   timeBlock.map(constructTimeBlock).join("");
 };
 
-// function to call when document loads
-const onLoad = function () {
-  getCurrentDate(); // not used yet
-  // render current date
-  const formattedDate = getCurrentDate(); // not used yet
-  //renderCurrentDate(formattedDate); // not used yet
-  // render time blocks
-  renderTimeBlocks(); // not used yet
+renderTimeBlocks();
+
+// loop to change present and future---....................................................... not working
+const notCurrent = function () {
+  for (timeBlock.key = 9; timeBlock.key < 18; timeBlock.key++)
+    var blockColour = $("#" + timeBlock.key);
+  if (currentHr == timeBlock.key) {
+    $("textarea").append("present");
+  } else if (currentHr < timeBlock.key) {
+    $("textarea").append("future");
+  }
 };
 
 // add load listener
 $(document).ready(function () {
-  //getCurrentDate(); // not used yet
+  getCurrentDate();
+  notCurrent();
   // render current date
   const formattedDate = getCurrentDate();
-  //renderCurrentDate(formattedDate); // not used yet
-  // render time blocks
-  renderTimeBlocks();
 });
