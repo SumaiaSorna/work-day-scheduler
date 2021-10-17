@@ -73,3 +73,11 @@ textarea {
   font-size: 20px;
   transition: all 0.3s ease-in-out;
 }
+
+#clear-ls {
+  border-left: 1px solid black;
+  background-color: #f1680c;
+  color: rgb(10, 9, 9);
+  border-radius: 5px;
+  margin: 10px;
+}

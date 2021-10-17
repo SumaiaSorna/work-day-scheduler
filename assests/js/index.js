@@ -114,6 +114,14 @@ const notCurrent = function () {
   }
 };
 
+// clear local storage
+const clearLS = function (event) {
+  localStorage.clear();
+  window.location.reload();
+};
+
+$("#clear-ls").click(clearLS);
+
 // add load listener
 $(document).ready(function () {
   getCurrentDate();
