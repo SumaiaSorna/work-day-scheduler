@@ -16,3 +16,5 @@ Work day scheduler is a event recorder that store user input by hour of the day.
 You can view the GitHub page deployed application here
 
 ## Screenshots
+
+![Screenshots!](assests\images\Screenshots\WorkDayScheduler.png)
