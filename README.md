@@ -17,4 +17,4 @@ You can view the GitHub page deployed application here. [link](https://sumaiasor
 
 ## Screenshots
 
-![work-day-scheduler!](./assests\images\Screenshots\WorkDayScheduler.png)
+![work-day-scheduler!](./assests/images/Screenshots/WorkDayScheduler.png)
