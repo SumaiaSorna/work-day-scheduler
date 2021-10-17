@@ -7,8 +7,8 @@ body {
 
 textarea {
   background: transparent;
-  /* border: none; */
-  /* resize: none; */
+  border: none;
+  resize: none;
   color: #4526f5;
   border-left: 1px solid rgb(82, 10, 10);
   padding: 10px;
@@ -17,7 +17,7 @@ textarea {
 .jumbotron {
   text-align: center;
   background-color: transparent;
-  color: black;
+  color: rgb(14, 13, 13);
   border-radius: 0;
   border-bottom: 10px solid black;
   background-color: rgb(144, 106, 235);
