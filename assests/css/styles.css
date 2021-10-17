@@ -2,14 +2,14 @@ body {
   font-family: "Open Sans", sans-serif;
   font-size: 16px;
   line-height: 1;
-  background-color: #fcff61;
+  background-color: #7797ec;
 }
 
 textarea {
   background: transparent;
   /* border: none; */
   /* resize: none; */
-  color: #d81616;
+  color: #4526f5;
   border-left: 1px solid rgb(82, 10, 10);
   padding: 10px;
 }
