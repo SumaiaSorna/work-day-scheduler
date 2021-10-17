@@ -15,33 +15,59 @@ const getCurrentDate = function () {
     dateText.text(dateTime_Formatted);
   };
   timer();
-  setInterval(timer, 1000); // real time update
+  setInterval(timer, 1000);
 };
 
-//  //Save data to LS--------------------------------------------------- not functional
-const saveSchedule = function () {
-  console.log("working"); ///test
+//Save data to LS
+const saveSchedule = function (event) {
+  const eventTarget = $(event.target);
+  const attr = eventTarget.attr("data-key");
+  const textarea = $(`#${attr}`);
 
-  // Creat space in LS
-  const containerLS = function () {}; //--- not sure how to do
+  if (eventTarget.is("#saveBtn")) {
+    const textValue = textarea.val();
+    let data = retrieveData("schedules");
 
-  //record at LS
-  const recordedData = function () {
-    const inputtedData = containerLS;
-    const inputtedTime = timeBlock.key;
-    localStorage.setItem(inputtedData, inputtedTime);
-    $(".saveBtn").on("click", recordedData);
-  };
+    const schedule = { key: attr, appointment: textValue };
+    const text = getItem(data, attr);
 
-  //LS checking at the beginning
-  const initialCheckLS = function () {
-    const initialState = localStorage.setItem(containerLS);
-    if (!initialState) {
-      localStorage.setItem(containerLS, JSON.stringify({}));
+    if (text) {
+      data.map(function (item, index) {
+        if (item.key == attr.toString()) {
+          data[index] = schedule;
+        }
+        return data;
+      });
+    } else {
+      data.push(schedule);
     }
-  };
+
+    savesData("schedules", data);
+  }
 };
 
+const getItem = function (data, key) {
+  const itemValue = data.find(function (item) {
+    if (item.key == key.toString()) {
+      return item;
+    }
+  });
+
+  return itemValue;
+};
+const savesData = function (dataKey, data) {
+  localStorage.setItem(dataKey, JSON.stringify(data));
+};
+
+const retrieveData = function (dataKey) {
+  const data = JSON.parse(localStorage.getItem(dataKey)) || [];
+
+  if (data.length > 0) {
+    return data;
+  } else {
+    return [];
+  }
+};
 // declare time blocks by key and table creation
 const renderTimeBlocks = function () {
   const timeBlock = [
@@ -84,33 +110,49 @@ const renderTimeBlocks = function () {
   ];
 
   // Table creation
-
+  const appointmentText = function (text) {
+    if (text) {
+      return text.appointment;
+    } else {
+      return "";
+    }
+  };
   const constructTimeBlock = function (timeBlock) {
-    const schedule = `<div class="row time-block">
+    const appointment = getItem(appointments, timeBlock.key);
+    let schedule = `<div class="row time-block" id = "timeBlock">
     <div class="col-1 hour">${timeBlock.label}</div>
-    <textarea class="col-10 description past"></textarea>
-    <button class="col-1 btn saveBtn" id=${timeBlock.key}>
-    <i class="fas fa-save"></i>
-    </button>
+    <textarea class="col-10 description past" id = ${
+      timeBlock.key
+    }>${appointmentText(appointment)}</textarea>
+    <button class="col-1 btn saveBtn" id="saveBtn" data-key = ${
+      timeBlock.key
+    } > Save Event</button>
   </div>`;
 
-    $(`#${timeBlock.key}`).on("click", saveSchedule());
     $("#mainContainer").append(schedule);
   };
-
+  const appointments = retrieveData("schedules");
   timeBlock.map(constructTimeBlock).join("");
 };
 
 renderTimeBlocks();
 
-// loop to change present and future---....................................................... not working
+// loop to change present and future
 const notCurrent = function () {
   for (timeBlock.key = 9; timeBlock.key < 18; timeBlock.key++)
     var blockColour = $("#" + timeBlock.key);
+
   if (currentHr == timeBlock.key) {
-    $("textarea").append("present");
+    blockColour.append("present");
   } else if (currentHr < timeBlock.key) {
-    $("textarea").append("future");
+    blockColour.append("future");
+  }
+};
+
+const initialCheckLS = function () {
+  const initialState = retrieveData("schedules") || [];
+  if (initialState.length < 1) {
+    savesData("schedules", []);
   }
 };
 
@@ -126,6 +168,9 @@ $("#clear-ls").click(clearLS);
 $(document).ready(function () {
   getCurrentDate();
   notCurrent();
+
+  initialCheckLS();
   // render current date
   const formattedDate = getCurrentDate();
+  timeBlock.on("click", saveSchedule);
 });
