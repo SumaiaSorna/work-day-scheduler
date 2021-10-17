@@ -13,7 +13,7 @@ Work day scheduler is a event recorder that store user input by hour of the day.
 
 ## Deployed URL
 
-You can view the GitHub page deployed application [link](https://sumaiasorna.github.io/work-day-scheduler/)
+You can view the GitHub page deployed application here. [link](https://sumaiasorna.github.io/work-day-scheduler/)
 
 ## Screenshots
 
