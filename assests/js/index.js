@@ -4,6 +4,8 @@ const timeText = $("#currentTime");
 const timeBlock = $(".container");
 const currentHr = moment().hour();
 
+const scheduleKey = "schedules";
+
 // use moment to get current date & time in format & real time update
 const getCurrentDate = function () {
   const timer = function () {
@@ -26,7 +28,7 @@ const saveSchedule = function (event) {
 
   if (eventTarget.is("#saveBtn")) {
     const textValue = textarea.val();
-    let data = retrieveData("schedules");
+    let data = retrieveData(scheduleKey);
 
     const schedule = { key: attr, appointment: textValue };
     const text = getItem(data, attr);
@@ -42,7 +44,7 @@ const saveSchedule = function (event) {
       data.push(schedule);
     }
 
-    savesData("schedules", data);
+    savesData(scheduleKey, data);
   }
 };
 
@@ -119,19 +121,21 @@ const renderTimeBlocks = function () {
   };
   const constructTimeBlock = function (timeBlock) {
     const appointment = getItem(appointments, timeBlock.key);
-    let schedule = `<div class="row time-block" id = "timeBlock">
-    <div class="col-1 hour">${timeBlock.label}</div>
-    <textarea class="col-10 description past" id = ${
+    let schedule = `<div class="time-block" id = "timeBlock">
+    <div class="row">
+    <div class="col-1 col-xs-3 hour">${timeBlock.label}</div>
+    <textarea class="col-10 col-xs-6 description past" id = ${
       timeBlock.key
     }>${appointmentText(appointment)}</textarea>
-    <button class="col-1 btn saveBtn" id="saveBtn" data-key = ${
+    <button class="col-1 col-xs-3 btn saveBtn" id="saveBtn" data-key = ${
       timeBlock.key
     } > Save Event</button>
+    </div>
   </div>`;
 
     $("#mainContainer").append(schedule);
   };
-  const appointments = retrieveData("schedules");
+  const appointments = retrieveData(scheduleKey);
   timeBlock.map(constructTimeBlock).join("");
 };
 
@@ -139,20 +143,59 @@ renderTimeBlocks();
 
 // loop to change present and future
 const notCurrent = function () {
-  for (timeBlock.key = 9; timeBlock.key < 18; timeBlock.key++)
-    var blockColour = $("#" + timeBlock.key);
+  const textareaEl = $(".description");
+  const times = [
+    {
+      key: 9,
+      label: "09:00",
+    },
+    {
+      key: 10,
+      label: "10:00",
+    },
+    {
+      key: 11,
+      label: "11:00",
+    },
+    {
+      key: 12,
+      label: "12:00",
+    },
+    {
+      key: 13,
+      label: "13:00",
+    },
+    {
+      key: 14,
+      label: "14:00",
+    },
+    {
+      key: 15,
+      label: "15:00",
+    },
+    {
+      key: 16,
+      label: "16:00",
+    },
+    {
+      key: 17,
+      label: "17:00",
+    },
+  ];
 
-  if (currentHr == timeBlock.key) {
-    blockColour.append("present");
-  } else if (currentHr < timeBlock.key) {
-    blockColour.append("future");
-  }
+  textareaEl.each(function (i, el) {
+    if (currentHr == times[i].key) {
+      $(this).addClass("present");
+    } else if (currentHr < times[i].key) {
+      $(this).addClass("future");
+    }
+  });
 };
 
 const initialCheckLS = function () {
-  const initialState = retrieveData("schedules") || [];
+  const initialState = retrieveData(scheduleKey) || [];
   if (initialState.length < 1) {
-    savesData("schedules", []);
+    savesData(scheduleKey, []);
   }
 };
 
@@ -170,7 +213,7 @@ $(document).ready(function () {
   notCurrent();
 
   initialCheckLS();
-  // render current date
+  //render current date
   const formattedDate = getCurrentDate();
   timeBlock.on("click", saveSchedule);
 });
