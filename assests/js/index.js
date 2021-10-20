@@ -121,17 +121,15 @@ const renderTimeBlocks = function () {
   };
   const constructTimeBlock = function (timeBlock) {
     const appointment = getItem(appointments, timeBlock.key);
-    let schedule = `<div class="time-block" id = "timeBlock">
-    <div class="row">
-    <div class="col-1 col-xs-3 hour">${timeBlock.label}</div>
-    <textarea class="col-10 col-xs-6 description past" id = ${
-      timeBlock.key
-    }>${appointmentText(appointment)}</textarea>
-    <button class="col-1 col-xs-3 btn saveBtn" id="saveBtn" data-key = ${
-      timeBlock.key
-    } > Save Event</button>
-    </div>
-  </div>`;
+    let schedule = `<div class="row my-2" id = "timeBlock">
+      <div class="col-12 col-md-2 hour">${timeBlock.label}</div>
+      <textarea class="col-12 col-md-8 description past" id = ${
+        timeBlock.key
+      }>${appointmentText(appointment)}</textarea>
+      <button class="col-12 col-md-2 btn saveBtn" id="saveBtn" data-key = ${
+        timeBlock.key
+      } > Save Event</button>
+    </div>`;
 
     $("#mainContainer").append(schedule);
   };
