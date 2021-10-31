@@ -64,12 +64,9 @@ const savesData = function (dataKey, data) {
 const retrieveData = function (dataKey) {
   const data = JSON.parse(localStorage.getItem(dataKey)) || [];
 
-  if (data.length > 0) {
-    return data;
-  } else {
-    return [];
-  }
+  return data;
 };
+
 // declare time blocks by key and table creation
 const renderTimeBlocks = function () {
   const timeBlock = [
