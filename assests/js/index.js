@@ -9,12 +9,12 @@ const scheduleKey = "schedules";
 // use moment to get current date & time in format & real time update
 const getCurrentDate = function () {
   const timer = function () {
-    const date_Time = moment();
-    const dateTime_Formatted = date_Time.format(
+    const dateTime = moment();
+    const dateTimeFormatted = dateTime.format(
       "dddd, MMMM Do YYYY, hh:mm:ss a "
     );
 
-    dateText.text(dateTime_Formatted);
+    dateText.text(dateTimeFormatted);
   };
   timer();
   setInterval(timer, 1000);
